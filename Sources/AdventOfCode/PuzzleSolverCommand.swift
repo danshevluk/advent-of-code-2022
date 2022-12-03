@@ -53,15 +53,7 @@ struct PuzzleSolverCommand: ParsableCommand {
         print()
         let solver = Self.solvers[day - 1]
 
-        let solution: String?
-        switch part {
-        case .one:
-            solution = solver.solvePart1(with: inputData)
-        case .two:
-            solution = solver.solvePart2(with: inputData)
-        }
-
-        if let solution {
+        if let solution = solver.solve(inputData, part: part) {
             print("The answer is...")
             print(solution)
         } else {
