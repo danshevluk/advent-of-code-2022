@@ -4,7 +4,7 @@ import Foundation
 extension PuzzleSolverCommand {
     static let solvers: [any PuzzleSolver] = [
        Day1Solver(),
-       // Your solvers for other days here...
+       Day2Solver(),
     ]
 }
 
