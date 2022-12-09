@@ -32,7 +32,35 @@ struct Day3Solver: PuzzleSolver {
     }
 
     private func solvePart2(_ inputData: String) -> String? {
-        nil
+        let rucksacks = inputData.split(whereSeparator: \.isNewline)
+
+        var prioritiesSum = 0
+        for groupStart in stride(from: rucksacks.startIndex, to: rucksacks.endIndex, by: 3) {
+            let group = rucksacks[groupStart..<rucksacks.index(groupStart, offsetBy: 3)]
+
+            guard let item = commonItem(in: group) else { continue }
+
+            prioritiesSum += priority(of: String(item))
+        }
+
+        return String(prioritiesSum)
+    }
+
+    private func commonItem(in group: some Sequence<some StringProtocol>) -> Character? {
+        var iterator = group.makeIterator()
+        guard var result = iterator.next().map({ Array($0) }) else { return nil }
+
+        while let item = iterator.next() {
+            result = commonItems(result, item)
+        }
+
+        return result.first
+    }
+
+    private func commonItems(_ first: some Sequence<Character>, _ second: some Sequence<Character>) -> [Character] {
+        first.compactMap { item in
+            return second.contains(item) ? item : nil
+        }
     }
 
     private func priority(of item: String) -> Int {
