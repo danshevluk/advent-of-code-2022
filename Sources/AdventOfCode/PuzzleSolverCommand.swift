@@ -5,6 +5,7 @@ extension PuzzleSolverCommand {
     static let solvers: [any PuzzleSolver] = [
        Day1Solver(),
        Day2Solver(),
+       Day3Solver(),
     ]
 }
 
